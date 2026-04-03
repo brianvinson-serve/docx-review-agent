@@ -80,10 +80,10 @@ def create_tracked_change_proposal():
         f'<w:p xmlns:w="{WNS}">'
         f'<w:r><w:t xml:space="preserve">This is </w:t></w:r>'
         f'<w:ins w:id="1" w:author="Jane Reviewer" w:date="2026-01-01T00:00:00Z">'
-        f'  <w:r><w:t xml:space="preserve">newly inserted </w:t></w:r>'
+        f'<w:r><w:t xml:space="preserve">newly inserted </w:t></w:r>'
         f'</w:ins>'
         f'<w:del w:id="2" w:author="Jane Reviewer" w:date="2026-01-01T00:00:00Z">'
-        f'  <w:r><w:delText>old text </w:delText></w:r>'
+        f'<w:r><w:delText>old text </w:delText></w:r>'
         f'</w:del>'
         f'<w:r><w:t>sample text.</w:t></w:r>'
         f'</w:p>'
@@ -141,13 +141,13 @@ def create_table_comment_doc():
 
             new_para_xml = (
                 f'<w:p xmlns:w="{WNS}">'
-                f'  <w:commentRangeStart w:id="1"/>'
-                f'  <w:r><w:t>Please reword this sentence.</w:t></w:r>'
-                f'  <w:commentRangeEnd w:id="1"/>'
-                f'  <w:r>'
-                f'    <w:rPr><w:rStyle w:val="CommentReference"/></w:rPr>'
-                f'    <w:commentReference w:id="1"/>'
-                f'  </w:r>'
+                f'<w:commentRangeStart w:id="1"/>'
+                f'<w:r><w:t>Please reword this sentence.</w:t></w:r>'
+                f'<w:commentRangeEnd w:id="1"/>'
+                f'<w:r>'
+                f'<w:rPr><w:rStyle w:val="CommentReference"/></w:rPr>'
+                f'<w:commentReference w:id="1"/>'
+                f'</w:r>'
                 f'</w:p>'
             )
             parent.insert(idx, etree.fromstring(new_para_xml))
