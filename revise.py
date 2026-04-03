@@ -12,7 +12,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 DEFAULT_MODEL = os.environ.get("DOCX_AGENT_MODEL", "claude-sonnet-4-6")
-MAX_TOKENS = 4096
+MAX_TOKENS = 8192
 CHUNK_TOKEN_THRESHOLD = 150_000
 
 SYSTEM_PROMPT = """You are a professional document editor. You will receive:
@@ -127,6 +127,6 @@ def revise_with_claude(extracted: dict, model: str = DEFAULT_MODEL) -> dict:
     print(f"  Estimated input tokens: ~{estimated_tokens:,}")
 
     if estimated_tokens > CHUNK_TOKEN_THRESHOLD:
-        print("  Document is large — processing in single call (may approach context limits).")
+        print("  Document exceeds recommended size — sending full document. Results may be incomplete if context limit is reached.")
 
     return _call_claude(prompt, model)
