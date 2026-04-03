@@ -158,11 +158,11 @@ def create_table_comment_doc():
     )
 
     comments_xml = (
-        f'<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n'
-        f'<w:comments xmlns:w="{WNS}">\n'
-        f'  <w:comment w:id="1" w:author="Alice Reviewer" w:date="2026-01-15T10:00:00Z">\n'
-        f'    <w:p><w:r><w:t>Please reword this sentence.</w:t></w:r></w:p>\n'
-        f'  </w:comment>\n'
+        f'<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+        f'<w:comments xmlns:w="{WNS}">'
+        f'<w:comment w:id="1" w:author="Alice Reviewer" w:date="2026-01-15T10:00:00Z">'
+        f'<w:p><w:r><w:t>Please reword this sentence.</w:t></w:r></w:p>'
+        f'</w:comment>'
         f'</w:comments>'
     ).encode("utf-8")
 
