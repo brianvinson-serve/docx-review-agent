@@ -1,0 +1,12 @@
+.env
+__pycache__/
+*.pyc
+*.pyo
+*_revised.docx
+tests/fixtures/clean_sow.docx
+tests/fixtures/tracked_change_proposal.docx
+tests/fixtures/table_comment_doc.docx
+.pytest_cache/
+*.egg-info/
+dist/
+build/
