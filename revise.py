@@ -4,6 +4,7 @@ Returns structured JSON: targeted edits and flagged comments.
 """
 import os
 import json
+import re
 import time
 import anthropic
 from dotenv import load_dotenv
@@ -97,12 +98,10 @@ def _call_claude(prompt: str, model: str) -> dict:
                 messages=[{"role": "user", "content": prompt}],
             )
             text = response.content[0].text.strip()
-            # Strip markdown fences if present
-            if text.startswith("```"):
-                lines = text.split("\n")
-                text = "\n".join(lines[1:])
-            if text.endswith("```"):
-                text = text[:-3].strip()
+            # Strip markdown code fences (handles ```json, ```JSON, ``` etc.)
+            text = re.sub(r'^```[a-zA-Z]*\n', '', text)
+            text = re.sub(r'\n```\s*$', '', text)
+            text = text.strip()
             return json.loads(text)
 
         except (anthropic.RateLimitError, anthropic.APIError) as e:
@@ -111,8 +110,10 @@ def _call_claude(prompt: str, model: str) -> dict:
             time.sleep(wait)
             last_error = e
         except json.JSONDecodeError as e:
-            print(f"  [parse error] Could not parse Claude response as JSON: {e}")
-            raise
+            wait = 2 ** (attempt + 1)
+            print(f"  [parse error] Could not parse Claude response as JSON: {e}. Retrying in {wait}s...")
+            time.sleep(wait)
+            last_error = e
 
     raise RuntimeError(f"Claude API failed after 3 attempts: {last_error}")
 
